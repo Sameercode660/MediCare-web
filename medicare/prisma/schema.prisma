@@ -21,7 +21,7 @@ model User {
   password     String
   createdAt    DateTime      @default(now())
   Appointment  Appointment[]
-  accessToken String 
+  accessToken  String
 }
 
 model Services {
@@ -40,12 +40,13 @@ model Appointment {
   mobileNumber    String
   address         String
   appointmentDate DateTime
+  status          String   @default("Confirmed")
   createdAt       DateTime @default(now())
   user            User     @relation(fields: [userId], references: [id])
 }
 
 model Admin {
-  id String @id @default(uuid())
+  id       String @id @default(uuid())
   fullName String
   email    String
   password String

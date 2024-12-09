@@ -62,6 +62,7 @@ export async function POST(req: NextRequest) {
       new ApiResponse(200, "Appointment Booked Successfully", response, true)
     );
   } catch (error) {
+    console.log(error)
     return NextResponse.json(
       new ApiResponse(500, "Unable to resolve the book appointment", [], false)
     );
