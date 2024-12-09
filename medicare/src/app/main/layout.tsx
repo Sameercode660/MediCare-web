@@ -7,8 +7,9 @@ function Layout({children}: {children: React.ReactNode}) {
     <>
       <Protected>
         <Main></Main>
+        {children}
       </Protected>
-      {children}
+      
     </>
   )
 }
