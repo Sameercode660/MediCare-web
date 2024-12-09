@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
             }
         })
 
-        return NextResponse.json(new ApiResponse(200, 'login successfull', updateResponse, false))
+        return NextResponse.json(new ApiResponse(200, 'login successfull', updateResponse, true))
 
     } catch (error) {
         return NextResponse.json(new ApiResponse(500, 'Unable to resolve the login function', [], false))
