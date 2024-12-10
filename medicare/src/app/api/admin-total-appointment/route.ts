@@ -4,7 +4,7 @@ import { ApiResponse } from "@/utils/Response";
 
 const prisma = new PrismaClient();
 
-export async function POST(req: NextRequest) {
+export async function POST() {
   try {
     const response = await prisma.appointment.findMany({});
 
