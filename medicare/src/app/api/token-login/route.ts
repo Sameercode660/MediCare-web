@@ -34,10 +34,15 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       new ApiResponse(200, "Login successfull", response, true)
     );
+  } catch (error: unknown) {
+    let errorMessage = "An unexpected error occurred";
 
-  } catch (error) {
-    return NextResponse.json(
-      new ApiResponse(500, "Unable to resolve the token login", [], false)
-    );
+    if (error instanceof Error) {
+      errorMessage = error.message; // Safe access after type checking
+    }
+
+    console.error("Error:", error);
+
+    return NextResponse.json(new ApiResponse(500, errorMessage, [], false));
   }
 }

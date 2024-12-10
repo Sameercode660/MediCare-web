@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
         email,
         mobileNumber,
         password,
-        accessToken: token
+        accessToken: token,
       },
     });
 
@@ -50,9 +50,15 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       new ApiResponse(200, "user registered successfully", response, true)
     );
-  } catch (error) {
-    return NextResponse.json(
-      new ApiResponse(400, "Unable to resolve the signup", [], false)
-    );
+  } catch (error: unknown) {
+    let errorMessage = "An unexpected error occurred";
+
+    if (error instanceof Error) {
+      errorMessage = error.message; // Safe access after type checking
+    }
+
+    console.error("Error:", error);
+
+    return NextResponse.json(new ApiResponse(500, errorMessage, [], false));
   }
 }

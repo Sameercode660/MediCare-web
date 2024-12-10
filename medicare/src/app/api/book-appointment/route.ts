@@ -10,14 +10,8 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
 
-    const {
-      userId,
-      fullName,
-      email,
-      mobileNumber,
-      address,
-      appointmentDate,
-    } = body;
+    const { userId, fullName, email, mobileNumber, address, appointmentDate } =
+      body;
 
     if (
       !userId ||
@@ -25,7 +19,7 @@ export async function POST(req: NextRequest) {
       !email ||
       !mobileNumber ||
       !address ||
-      !appointmentDate 
+      !appointmentDate
     ) {
       return NextResponse.json(
         new ApiResponse(400, "Anyone field is empty", [], false)
@@ -41,13 +35,23 @@ export async function POST(req: NextRequest) {
         email,
         mobileNumber,
         address,
-        appointmentDate 
+        appointmentDate,
       },
     });
 
-    await sendEmail(email, 'Appointment booked', fullName, 'appointment booked succssfully')
-    await sendAdminMail('mesh789736@gmail.com','Notification for appointment', fullName, address )
-    console.log(response)
+    await sendEmail(
+      email,
+      "Appointment booked",
+      fullName,
+      "appointment booked succssfully"
+    );
+    await sendAdminMail(
+      "mesh789736@gmail.com",
+      "Notification for appointment",
+      fullName,
+      address
+    );
+    console.log(response);
 
     if (!response) {
       return NextResponse.json(
@@ -63,10 +67,16 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       new ApiResponse(200, "Appointment Booked Successfully", response, true)
     );
-  } catch (error: any) {
-    console.error(error.message)
-    return NextResponse.json(
-      new ApiResponse(500, "Unable to resolve the book appointment", [], false)
-    );
+    
+  } catch (error: unknown) {
+    let errorMessage = "An unexpected error occurred";
+
+    if (error instanceof Error) {
+      errorMessage = error.message; // Safe access after type checking
+    }
+
+    console.error("Error:", error);
+
+    return NextResponse.json(new ApiResponse(500, errorMessage, [], false));
   }
 }

@@ -33,7 +33,12 @@ export async function POST(req: NextRequest) {
         )
       );
     }
-    await cancelMail(response.email, 'Appointment Cancelled',  response.fullName, "Sorry to inform you that your appointment has been cancelled" )
+    await cancelMail(
+      response.email,
+      "Appointment Cancelled",
+      response.fullName,
+      "Sorry to inform you that your appointment has been cancelled"
+    );
     return NextResponse.json(
       new ApiResponse(
         200,
@@ -42,9 +47,15 @@ export async function POST(req: NextRequest) {
         true
       )
     );
-  } catch (error) {
-    return NextResponse.json(
-      new ApiResponse(500, "Unable to resolve cancel appointment", [], false)
-    );
+  } catch (error: unknown) {
+    let errorMessage = "An unexpected error occurred";
+
+    if (error instanceof Error) {
+      errorMessage = error.message; // Safe access after type checking
+    }
+
+    console.error("Error:", error);
+
+    return NextResponse.json(new ApiResponse(500, errorMessage, [], false));
   }
 }

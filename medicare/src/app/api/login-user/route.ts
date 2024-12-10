@@ -43,7 +43,16 @@ export async function POST(req: NextRequest) {
 
         return NextResponse.json(new ApiResponse(200, 'login successfull', updateResponse, true))
 
-    } catch (error) {
-        return NextResponse.json(new ApiResponse(500, 'Unable to resolve the login function', [], false))
-    }
+    } catch (error: unknown) {
+
+        let errorMessage = "An unexpected error occurred";
+    
+        if (error instanceof Error) {
+          errorMessage = error.message; // Safe access after type checking
+        }
+    
+        console.error("Error:", error);
+    
+        return NextResponse.json(new ApiResponse(500, errorMessage, [], false));
+      }
 }
