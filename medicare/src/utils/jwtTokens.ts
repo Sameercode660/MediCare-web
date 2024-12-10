@@ -17,14 +17,14 @@ export function verifyToken(token: string): JwtPayload | string | null {
   try {
     return jwt.verify(token, secretKey) as JwtPayload;
   } catch (error: unknown) {
-    
+
     let errorMessage = "An unexpected error occurred";
 
     if (error instanceof Error) {
       errorMessage = error.message; // Safe access after type checking
     }
 
-    console.error("Error:", error);
+    console.error("Error:", error, errorMessage);
     return null;
   }
 }
