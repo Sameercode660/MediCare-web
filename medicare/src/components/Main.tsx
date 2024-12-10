@@ -18,6 +18,7 @@ function Main() {
 
   function handleLogin() {
     localStorage.setItem('login', 'false')
+    localStorage.removeItem('token')
     router.push('./')
   }
   return (

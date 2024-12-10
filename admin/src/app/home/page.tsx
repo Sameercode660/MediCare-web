@@ -2,7 +2,7 @@ import React from 'react'
 import Home from '@/components/Home'
 import Protected from '@/components/Protected'
 
-function page() {
+function Page() {
     return (
         <>
             <Home></Home>
@@ -10,4 +10,4 @@ function page() {
     )
 }
 
-export default page
+export default Page

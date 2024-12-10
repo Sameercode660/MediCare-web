@@ -35,8 +35,6 @@ function Page() {
             const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/book-appointment`, appointmentDetails)
             setLoading(false)
 
-            console.log(response)
-
             if (response.data.status == true) {
                 alert('Appointment booked successfully')
                 router.push('/main/appointment')

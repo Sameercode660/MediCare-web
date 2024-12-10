@@ -29,7 +29,7 @@ function Login() {
       const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/login-user`, data)
       setLoading(false)
 
-      console.log(response.data)
+      
 
       if(response.data.status == true) {
         localStorage.setItem('id', response.data.response.id)

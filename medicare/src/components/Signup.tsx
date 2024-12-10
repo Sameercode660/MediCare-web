@@ -33,7 +33,6 @@ function Signup() {
 
       const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/signup-user`, data)
       setLoading(false)
-      console.log(response);
 
       if (response.data.status == true) {
         localStorage.setItem('id', response.data.response.id)

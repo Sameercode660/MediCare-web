@@ -25,7 +25,6 @@ function Home() {
     async function handleFetchTotalAppointment() {
         try {
             const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin-total-appointment`)
-            console.log(response)
 
             setData(response.data.response)
         } catch (error) {

@@ -34,10 +34,8 @@ const AppointmentCard: React.FC<AppointmentCardProps> = ({
             }
 
             setLoading(true)
-            const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/cancel-appointment`, data)
+            await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/cancel-appointment`, data)
             setLoading(false)
-
-            console.log(response)
 
             fetchData()
 

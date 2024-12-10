@@ -1,6 +1,5 @@
 'use client'
 import React, {useState} from 'react'
-import Link from 'next/link'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 
@@ -28,8 +27,6 @@ function Login() {
 
       const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/login-admin`, data)
       setLoading(false)
-
-      console.log(response.data)
 
       if(response.data.status == true) {
         localStorage.setItem('id', response.data.response.id)
@@ -65,9 +62,7 @@ function Login() {
       <div>
         <button onClick={handleLogin} className='w-[200px] h-[40px] border bg-blue-300 outline-none rounded-md text-white font-semibold text-[18px]'>{`${loading ? 'Sigining...': 'Sign in'}`}</button>
       </div>
-      <div>
-        <Link href="./" className='text-[14px]'>New User <span className='underline'>SignUp?</span></Link>
-      </div>
+     
     </div>
   )
 }

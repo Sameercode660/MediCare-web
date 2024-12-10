@@ -2,7 +2,20 @@
 import React, { useEffect, useState } from 'react'
 import AppointmentCard from './AppointmentCard'
 import axios from 'axios'
+import Loading from './Loading'
 
+export interface Appointment {
+    id: string;  
+    userId: string;  
+    fullName: string; 
+    email: string; 
+    mobileNumber: string;  
+    address: string;  
+    appointmentDate: string;  
+    status: string;  
+    createdAt: string;  
+  }
+  
 
 function MyAppointment() {
 
@@ -18,7 +31,6 @@ function MyAppointment() {
             const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/my-total-appointment`, data)
             setLoading(false)
 
-            console.log(response)
 
             setData(response.data.response)
 
@@ -33,8 +45,8 @@ function MyAppointment() {
     return (
         <>
             {
-                loading == true ? (<div>Loading...</div>) : (
-                    data.length == 0 ? (<div>No any appointment</div>) : (data.reverse().map((element: any) => (<AppointmentCard key={element.id} customerName={element.fullName} appointmentDate={element.appointmentDate} status={element.status}></AppointmentCard>)))
+                loading == true ? (<Loading></Loading>) : (
+                    data.length == 0 ? (<div>No any appointment</div>) : (data.reverse().map((element: Appointment) => (<AppointmentCard key={element.id} customerName={element.fullName} appointmentDate={element.appointmentDate} status={element.status}></AppointmentCard>)))
                 )
             }
 
