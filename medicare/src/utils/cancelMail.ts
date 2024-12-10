@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
 
-export async function sendEmail(
+export async function cancelMail(
   recipientEmail: string,
   subject: string,
   recipientName: string,

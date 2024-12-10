@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
 
-export async function sendEmail(
+export async function sendAdminMail(
   recipientEmail: string,
   subject: string,
   recipientName: string,
@@ -75,12 +75,11 @@ export async function sendEmail(
       <body>
         <div class="email-container">
           <div class="header">
-            <h1>Welcome, ${recipientName}!</h1>
+            <h1>Dear, Admin}</h1>
           </div>
           <div class="content">
-            <p>Dear ${recipientName},</p>
+            <p>${recipientName}, has booked the appointment</p>
             <p>${messageBody}</p>
-            <p>If any concern? Please contact us on 1234567890</p>
             <a href="#" class="button">Learn More</a>
           </div>
           <div class="footer">

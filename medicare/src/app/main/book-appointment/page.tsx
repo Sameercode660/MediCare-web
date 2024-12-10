@@ -38,7 +38,8 @@ function Page() {
             console.log(response)
 
             if (response.data.status == true) {
-                router.push('/appointment')
+                alert('Appointment booked successfully')
+                router.push('/main/appointment')
             } else {
                 alert('Unable to book the appointment')
             }

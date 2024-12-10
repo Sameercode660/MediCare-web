@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import { ApiResponse } from "@/utils/Response";
 import { sendEmail } from "@/utils/sendmail";
+import { sendAdminMail } from "@/utils/sendAdminMail";
 
 const prisma = new PrismaClient();
 
@@ -45,6 +46,7 @@ export async function POST(req: NextRequest) {
     });
 
     await sendEmail(email, 'Appointment booked', fullName, 'appointment booked succssfully')
+    await sendAdminMail('mesh789736@gmail.com','Notification for appointment', fullName, address )
     console.log(response)
 
     if (!response) {
@@ -61,8 +63,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       new ApiResponse(200, "Appointment Booked Successfully", response, true)
     );
-  } catch (error) {
-    console.log(error)
+  } catch (error: any) {
+    console.error(error.message)
     return NextResponse.json(
       new ApiResponse(500, "Unable to resolve the book appointment", [], false)
     );

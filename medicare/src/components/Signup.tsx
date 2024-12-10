@@ -25,7 +25,7 @@ function Signup() {
       }
 
 
-      if(!fullName || !email || !mobileNumber || !password) {
+      if (!fullName || !email || !mobileNumber || !password) {
         alert('Any one field is empty')
         return;
       }
@@ -35,7 +35,8 @@ function Signup() {
       setLoading(false)
       console.log(response);
 
-      if(response.data.status == true) {
+      if (response.data.status == true) {
+        localStorage.setItem('id', response.data.response.id)
         localStorage.setItem("token", response.data.response.accessToken)
         localStorage.setItem("login", "true")
         router.push('./main')
@@ -43,8 +44,8 @@ function Signup() {
         localStorage.setItem("login", "false")
         alert("Unable to sign in, Try again later")
       }
-    
-      
+
+
     } catch (error) {
       alert(error)
     }
@@ -77,7 +78,7 @@ function Signup() {
         }} type="password" className='outline-none border rounded-md p-2 m-2' placeholder='Password' />
       </div>
       <div>
-        <button onClick={handleSignup} className='w-[200px] h-[40px] border bg-blue-300 outline-none rounded-md text-white font-semibold text-[18px]'>{`${loading ? 'Sigining...': 'Signup'}`}</button>
+        <button onClick={handleSignup} className='w-[200px] h-[40px] border bg-blue-300 outline-none rounded-md text-white font-semibold text-[18px]'>{`${loading ? 'Sigining...' : 'Signup'}`}</button>
       </div>
       <div>
         <Link href="./login" className='text-[14px]'>Already User <span className='underline'>Login?</span></Link>

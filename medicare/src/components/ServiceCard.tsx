@@ -1,8 +1,12 @@
 'use client';
 
 import React from "react";
+import { useRouter } from "next/navigation";
 
 function ServiceCard() {
+
+    const router = useRouter()
+
     return (
         <div className="flex items-center justify-center bg-gray-100">
             <div className="w-[90%] max-w-sm bg-white rounded-lg shadow-lg overflow-hidden">
@@ -29,7 +33,9 @@ function ServiceCard() {
                     </p>
 
                     {/* Button */}
-                    <button className="w-full py-3 text-white text-sm font-semibold rounded-lg bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-blue-600 hover:to-purple-600 transition-all transform hover:scale-105 active:scale-95 focus:outline-none">
+                    <button onClick={() => {
+                        router.push('/main/book-appointment')
+                    }} className="w-full py-3 text-white text-sm font-semibold rounded-lg bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-blue-600 hover:to-purple-600 transition-all transform hover:scale-105 active:scale-95 focus:outline-none">
                         Book Appointment
                     </button>
                 </div>

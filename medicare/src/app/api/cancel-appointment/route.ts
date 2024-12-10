@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import { ApiResponse } from "@/utils/Response";
+import { cancelMail } from "@/utils/cancelMail";
 
 const prisma = new PrismaClient();
 
@@ -32,7 +33,7 @@ export async function POST(req: NextRequest) {
         )
       );
     }
-
+    await cancelMail(response.email, 'Appointment Cancelled',  response.fullName, "Sorry to inform you that your appointment has been cancelled" )
     return NextResponse.json(
       new ApiResponse(
         200,

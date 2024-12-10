@@ -26,16 +26,15 @@ function Login() {
         return;
       }
 
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/login-user`, data)
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/login-admin`, data)
       setLoading(false)
 
       console.log(response.data)
 
       if(response.data.status == true) {
         localStorage.setItem('id', response.data.response.id)
-        localStorage.setItem("token", response.data.response.accessToken)
         localStorage.setItem("login", "true")
-        router.push('./main')
+        router.push('/home')
       } else {
         localStorage.setItem("login", "false")
         alert("Unable to login")
@@ -44,6 +43,8 @@ function Login() {
 
     } catch (error) {
       alert(error)
+    } finally {
+      setLoading(false)
     }
   }
   return (
